@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter.ttk
+from Controller import *
 
 class RegistrationUI():
     def insert(self):
@@ -10,11 +11,8 @@ class RegistrationUI():
         self.rp=self.e1.get()
         if(self.p==self.rp):
             self.uh="@"+self.uh
-
-            print(self.n)
-            print(self.ei)
-            print(self.uh)
-            print(self.p)
+            c=register
+            c.usrgstr(c,self.n,self.ei,self.uh,self.p)
 
     def __init__(self, master):
         self.master=master

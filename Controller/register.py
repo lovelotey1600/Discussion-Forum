@@ -1,7 +1,10 @@
+from Model.DbFunctions import *
+
 class register:
-    @staticmethod
-    def register(name,):
-        pass
+    def usrgstr(self,name,eid,userh,passwd):
+        m1=Dbfunctions
+        m1.insert(self,name,eid,userh,passwd)
+       
 
 
 
