@@ -1,6 +1,10 @@
 from tkinter import *
 import tkinter.ttk
-from DiscussionForum.Controller.register import *
+
+import sys
+sys.path.append("..")
+
+from Controller.register import *
 
 class RegistrationUI():
     def insert(self):
@@ -11,6 +15,13 @@ class RegistrationUI():
         self.rp=self.e1.get()
         if(self.p==self.rp):
             self.uh="@"+self.uh
+
+            self.e1.configure(text="")
+            self.e2.configure(text="")
+            self.e5.configure(text="")
+            self.e3.configure(text="")
+            self.e4.configure(text="")
+            
             c=register
             c.usrgstr(c,self.n,self.ei,self.uh,self.p)
 
