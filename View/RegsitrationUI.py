@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter.ttk
-from Controller.register import *
+from DiscussionForum.Controller.register import *
 
 class RegistrationUI():
     def insert(self):
