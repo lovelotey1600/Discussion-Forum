@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter.ttk
-from Controller import *
+from Controller.register import *
 
 class RegistrationUI():
     def insert(self):
