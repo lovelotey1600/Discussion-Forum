@@ -5,27 +5,35 @@ import sys
 sys.path.append("..")
 
 from Controller.register import *
+from View.startUp import *
 
 class RegistrationUI():
+    def toggleStartUpUI(self):
+        self.master.destroy()
+        root = Tk()
+        my_gui = StartUP(root)
+        root.mainloop()
+        pass
+
     def insert(self):
         self.n=self.e1.get()
         self.ei=self.e2.get()
-        self.uh=self.e3.get()
-        self.p=self.e1.get()
-        self.rp=self.e1.get()
+        self.uh=self.e5.get()
+        self.p=self.e3.get()
+        self.rp=self.e4.get()
         if(self.p==self.rp):
             self.uh="@"+self.uh
 
-            self.e1.configure(text="")
-            self.e2.configure(text="")
-            self.e5.configure(text="")
-            self.e3.configure(text="")
-            self.e4.configure(text="")
+            self.e1.delete(0, 'end')
+            self.e2.delete(0, 'end')
+            self.e5.delete(0, 'end')
+            self.e3.delete(0, 'end')
+            self.e4.delete(0, 'end')
             
             c=register
             c.usrgstr(c,self.n,self.ei,self.uh,self.p)
 
-    def __init__(self, master):
+    def __init__(self, master,a):
         self.master=master
         self.f1 = Frame(master)
         self.f1.pack(fill="both", expand=True, padx=20, pady=20)
@@ -59,6 +67,7 @@ class RegistrationUI():
 
         self.e5=Entry(self.f2,width=20)
         self.e5.grid(row=3,column=2,padx=10, pady=10)
+        self.e5.insert(END,a)
 
         self.e3=Entry(self.f2,width=20)
         self.e3.grid(row=4,column=2,padx=10, pady=10)
@@ -67,17 +76,17 @@ class RegistrationUI():
         self.e4.grid(row=5,column=2,padx=10, pady=10)
 
         #Register Button
-        self.register=Button(self.f2,text="Register",command=lambda:self.insert())
+        self.register=Button(self.f2,text="Register",command=self.insert)
         self.register.grid(row=6,column=1,padx=10, pady=10)
         
         #Cancel Button
-        self.cancel=Button(self.f2,text="Cancel")
+        self.cancel=Button(self.f2,text="Cancel",command=self.toggleStartUpUI)
         self.cancel.grid(row=6,column=2,padx=10, pady=10)
         
     
 
 
 
-root = Tk()
-my_gui = RegistrationUI(root)
-root.mainloop()
+#root = Tk()
+#my_gui = RegistrationUI(root)
+#root.mainloop()

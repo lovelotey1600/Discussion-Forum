@@ -1,6 +1,20 @@
 from tkinter import *
 import tkinter.ttk
+import sys
+sys.path.append("..")
+
+from View.RegsitrationUI import *
 class StartUP:
+    def toggleRegistrationUI(self):
+        self.u=self.ruID.get()
+        self.master.destroy()
+        root = Tk()
+        my_gui = RegistrationUI(root,self.u)
+        root.mainloop()
+    
+    def toggleLoginUI(self):
+        pass
+
     def __init__(self, master):
         self.master=master
         self.f1 = Frame(master)
@@ -20,7 +34,7 @@ class StartUP:
         self.ruID=Entry(self.f2,width=20)
         self.ruID.grid(column=2,row=2)
 
-        self.b1=Button(self.f2,text="Register")
+        self.b1=Button(self.f2,text="Register",command=self.toggleRegistrationUI)
         self.b1.grid(row=5,column=2)
 
         #Login Section
