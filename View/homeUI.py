@@ -1,19 +1,19 @@
+import sys
+sys.path.append("..")
 from tkinter import *
 import tkinter as tk
 import tkinter.ttk
-from tkinter import scrolledtext
-import sys
-sys.path.append("..")
-
-from Controller.ForumFucntions import *
+#from tkinter import scrolledtext
+from Controller.ForumFunctions import *
 
 class homeUI():
-    def insertQuestion():
-        self.win.destroy()
-        ques=self.q.get()
-        ans=self.a.get()
+    def insertQuestion(self):
+        self.ques=self.q.get()
+        self.ans=self.a.get()
+        print(self.ques)
         f=ForumFunctions
-        f.createQuestion(f,ques,ans)
+        f.createQuestion(f,self.ques,self.ans)
+        self.win.destroy()
 
     def startDiscussion(self):
         self.win = tk.Toplevel()
@@ -22,13 +22,13 @@ class homeUI():
         self.l = Label(self.win, text="Enter your question Title: ")
         self.l.grid(row=0, column=0,padx=10, pady=10)
 
-        self.q=scrolledtext.ScrolledText(self.win, width=20,height=10)
+        self.q=Entry(self.win, width=20)
         self.q.grid(row=0, column=1,padx=10, pady=10)
 
         self.l2 = Label(self.win, text="Elaborate your problem: ")
         self.l2.grid(row=1, column=0,padx=10, pady=10)
 
-        self.a=scrolledtext.ScrolledText(self.win, width=20,height=10)
+        self.a=Entry(self.win, width=20)
         self.a.grid(row=1, column=1,padx=10, pady=10)
 
 
