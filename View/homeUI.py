@@ -45,9 +45,6 @@ class homeUI():
         self.w2.add(self.b2)
 
 
-root = Tk()
-my_gui = homeUI(root)
-root.mainloop()
 
 
 

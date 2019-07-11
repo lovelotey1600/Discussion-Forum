@@ -4,16 +4,16 @@ import tkinter.ttk
 import sys
 sys.path.append("..")
 
-from Controller.register import *
+from Controller.signupIN import *
 from View.startUp import *
 
 class RegistrationUI():
     def toggleStartUpUI(self):
+        
         self.master.destroy()
         root = Tk()
         my_gui = StartUP(root)
         root.mainloop()
-        pass
 
     def insert(self):
         self.n=self.e1.get()
@@ -22,8 +22,7 @@ class RegistrationUI():
         self.p=self.e3.get()
         self.rp=self.e4.get()
         if(self.p==self.rp):
-            self.uh="@"+self.uh
-
+            
             self.e1.delete(0, 'end')
             self.e2.delete(0, 'end')
             self.e5.delete(0, 'end')

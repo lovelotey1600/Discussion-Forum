@@ -16,6 +16,31 @@ class DbFunctions:
         except Exception as e:  
             messagebox.showinfo("Error", "you cannot register \n "+str(e))   
 
+    def checkRegisteredAccountDB(self,uid):
+        
+        self.mydb=DbConnection.getConnection()
+        self.mycursor=self.mydb.cursor()
+        self.sql="select * from users where usrh = (%s)"
+        self.values=(uid,)
+        self.mycursor.execute(self.sql,self.values)
+        re=self.mycursor.fetchone()
+        if re is None:
+            return 1
+        else:
+            messagebox.showinfo("Registration ",uid+ " had been already registered. Please try logging in.")   
+
+    def checkLoginCredentials(self,uid,pd):
+        self.mydb=DbConnection.getConnection()
+        self.mycursor=self.mydb.cursor()
+        self.sql="select * from users where usrh = (%s) and passwd =(%s)"
+        self.values=(uid,pd)
+        self.mycursor.execute(self.sql,self.values)
+        re=self.mycursor.fetchone()
+        if re is not None:
+            return 1
+        else:
+            messagebox.showinfo("Login ","Invalid username or password.")   
+        pass
     
 
 
