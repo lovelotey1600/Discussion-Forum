@@ -1,7 +1,41 @@
 from tkinter import *
+import tkinter as tk
 import tkinter.ttk
+from tkinter import scrolledtext
+import sys
+sys.path.append("..")
+
+from Controller.ForumFucntions import *
 
 class homeUI():
+    def insertQuestion():
+        self.win.destroy()
+        ques=self.q.get()
+        ans=self.a.get()
+        f=ForumFunctions
+        f.createQuestion(f,ques,ans)
+
+    def startDiscussion(self):
+        self.win = tk.Toplevel()
+        self.win.wm_title("Window")
+    
+        self.l = Label(self.win, text="Enter your question Title: ")
+        self.l.grid(row=0, column=0,padx=10, pady=10)
+
+        self.q=scrolledtext.ScrolledText(self.win, width=20,height=10)
+        self.q.grid(row=0, column=1,padx=10, pady=10)
+
+        self.l2 = Label(self.win, text="Elaborate your problem: ")
+        self.l2.grid(row=1, column=0,padx=10, pady=10)
+
+        self.a=scrolledtext.ScrolledText(self.win, width=20,height=10)
+        self.a.grid(row=1, column=1,padx=10, pady=10)
+
+
+        self.b = Button(self.win, text="Submit", command=self.insertQuestion)
+        self.b.grid(row=2, column=1)
+
+        
     def search(self):
         self.w2.remove(self.b2)
         self.searchT=Entry(self.master,width=20)
@@ -30,7 +64,7 @@ class homeUI():
         self.b1.pack(padx=10, pady=10)
         self.w2.add(self.b1)
 
-        self.b3=Button(self.p1,text="Start a new Dicussion ")
+        self.b3=Button(self.p1,text="Start a new Dicussion ",command=self.startDiscussion)
         self.b3.pack(padx=10, pady=10)
         self.w2.add(self.b3)
 
