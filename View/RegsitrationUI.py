@@ -74,12 +74,12 @@ class RegistrationUI():
         self.e4=Entry(self.f2,width=20)
         self.e4.grid(row=5,column=2,padx=10, pady=10)
 
-        #Register Button
-        self.register=Button(self.f2,text="Register",command=self.insert)
+        #Register tkinter.ttk.Button
+        self.register=tkinter.ttk.Button(self.f2,text="Register",command=self.insert)
         self.register.grid(row=6,column=1,padx=10, pady=10)
         
-        #Cancel Button
-        self.cancel=Button(self.f2,text="Cancel",command=self.toggleStartUpUI)
+        #Cancel tkinter.ttk.Button
+        self.cancel=tkinter.ttk.Button(self.f2,text="Cancel",command=self.toggleStartUpUI)
         self.cancel.grid(row=6,column=2,padx=10, pady=10)
         
     

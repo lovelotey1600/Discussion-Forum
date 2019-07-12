@@ -55,34 +55,54 @@ class DbFunctions:
         self.mydb.commit()
         self.mydb.close()
 
-    def crtQuesTable(self,ques):
+    def searchQues(self,ques):
         self.mydb=DbConnection.getConnection()
         self.mycursor=self.mydb.cursor()
-        self.sql="insert into forumTable(questionTitle) values(%s)"
+        self.sql="select * from forumTable where questionTitle = (%s)"
         self.que=(ques,)
         self.mycursor.execute(self.sql,self.que)
-        self.mydb.commit()
-        self.mydb.close()
-
-        self.mydb=DbConnection.getConnection()
-        self.mycursor=self.mydb.cursor()
-        self.sql1="select ques_id from forumTable where questionTitle = %s ;"
-        self.que=(ques,)
-        self.mycursor.execute(self.sql1,self.que)
-        self.re=self.mycursor.fetchone()
-        self.l=str(self.re[0])
-        self.l=self.l+"q"
-
-        self.mydb.close()
+        re=self.mycursor.fetchone()
+        if re is None:
+            self.mydb.close()
+            return 1
+        else:
+            self.mydb.close()
+            return re[1]
+        
 
 
-        self.mydb=DbConnection.getConnection()
-        self.mycursor=self.mydb.cursor()
-        self.sql2="CREATE TABLE IF NOT EXISTS {table} (answer_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,answer TEXT not null,upvote int DEFAULT '0',date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);"
-        self.mycursor.execute(self.sql2.format(table=self.l))
-        self.mydb.commit()
-        self.mydb=DbConnection.getConnection()
-        self.mycursor=self.mydb.cursor()
+    def crtQuesTable(self,ques):
+        qu=self.searchQues(self,ques)
+        if qu==1:
+            self.mydb=DbConnection.getConnection()
+            self.mycursor=self.mydb.cursor()
+            self.sql="insert into forumTable(questionTitle) values(%s)"
+            self.que=(ques,)
+            self.mycursor.execute(self.sql,self.que)
+            self.mydb.commit()
+            self.mydb.close()
+
+            self.mydb=DbConnection.getConnection()
+            self.mycursor=self.mydb.cursor()
+            self.sql1="select ques_id from forumTable where questionTitle = %s ;"
+            self.que=(ques,)
+            self.mycursor.execute(self.sql1,self.que)
+            self.re=self.mycursor.fetchone()
+            self.l=str(self.re[0])
+            self.l=self.l+"q"
+
+            self.mydb.close()
+
+
+            self.mydb=DbConnection.getConnection()
+            self.mycursor=self.mydb.cursor()
+            self.sql2="CREATE TABLE IF NOT EXISTS {table} (answer_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,answer TEXT not null,upvote int DEFAULT '0',date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);"
+            self.mycursor.execute(self.sql2.format(table=self.l))
+            self.mydb.commit()
+            self.mydb.close()
+        else:
+            messagebox.showinfo("Error ","This question had previously been asked. Try searching for that question")   
+            self.mydb.close()
 
     def insertAnsTable(self,que,ans):
         self.mydb=DbConnection.getConnection()
@@ -91,7 +111,31 @@ class DbFunctions:
         self.values=(ans,)
         self.mycursor.execute(self.sql.format(table=self.l),self.values)
         self.mydb.commit()
+        self.mydb.close()
        
+    def getList(self):
+        self.mydb=DbConnection.getConnection()
+        self.mycursor=self.mydb.cursor()
+        self.sql="select count(*) from forumTable"
+        self.mycursor.execute(self.sql)
+        re=self.mycursor.fetchone()
+        self.mydb.close()
+        return re[0]
+        
+    def getQuestions(self):
+        self.mydb=DbConnection.getConnection()
+        self.mycursor=self.mydb.cursor()
+        self.sql="select questionTitle from forumTable ORDER BY ques_id DESC"
+        self.mycursor.execute(self.sql)
+        re=self.mycursor.fetchall()
+        self.mydb.close()
+        list_of_questions=[]
+        print(len(re))
+        for i in range(len(re)):
+            list_of_questions.append(re[i][0])
+        
+        return list_of_questions
+    
         
     
 

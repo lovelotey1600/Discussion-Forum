@@ -60,7 +60,7 @@ class StartUP:
         self.ruID=Entry(self.f2,width=20)
         self.ruID.grid(column=2,row=2,padx=10, pady=10)
 
-        self.b1=Button(self.f2,text="Register",command=self.toggleRegistrationUI)
+        self.b1=tkinter.ttk.Button(self.f2,text="Register",command=self.toggleRegistrationUI)
         self.b1.grid(row=5,column=2,padx=10, pady=10)
 
         #Login Section
@@ -79,7 +79,7 @@ class StartUP:
         self.passwd=Entry(self.f2,width=20)
         self.passwd.grid(column=6,row=3,padx=10, pady=10)
 
-        self.b1=Button(self.f2,text="Log in",command=self.toggleLoginUI)
+        self.b1=tkinter.ttk.Button(self.f2,text="Log in",command=self.toggleLoginUI)
         self.b1.grid(row=5,column=6,padx=10, pady=10)
         
         #Seperator
