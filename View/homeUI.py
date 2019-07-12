@@ -20,7 +20,7 @@ class homeUI():
             
             # --- add widgets in frame ---
 
-            self.label_widgets.append(Label(self.forumFrame,text=self.questions[i]))
+            self.label_widgets.append(Label(self.forumFrame,text=self.questions[i],font=(None,20)))
             self.label_widgets[-1].grid(row= i+1, column =0, sticky='e', padx=10, pady=10)
 
     def search(self,searchstr):
@@ -33,7 +33,6 @@ class homeUI():
     def insertQuestion(self):
         self.ques=self.q.get()
         self.ans=self.a.get()
-        print(self.ques)
         f=ForumFunctions
         f.createQuestion(f,self.ques,self.ans)
         self.refresh()
@@ -121,6 +120,6 @@ class homeUI():
 
         self.label_widgets=[]
         self.forumFrame = tk.Frame(self.canvas)
-        self.canvas.create_window((0,0), window=self.forumFrame, anchor='nw')
+        self.canvas.create_window((0,0), window=self.forumFrame, anchor='w')
         self.refresh()
 

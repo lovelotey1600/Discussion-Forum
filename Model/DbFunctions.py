@@ -130,7 +130,6 @@ class DbFunctions:
         re=self.mycursor.fetchall()
         self.mydb.close()
         list_of_questions=[]
-        print(len(re))
         for i in range(len(re)):
             list_of_questions.append(re[i][0])
         
